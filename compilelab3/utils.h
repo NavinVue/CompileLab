@@ -72,6 +72,5 @@ void trans_wordtype(WordType wtype);                                            
 void trans_op(std::string op);
 // void anylizer(std::string str); // 词法分析
 void parser();  // 语法分析
-void codegen(); // 代码生成
 
 #endif // UTILS_H

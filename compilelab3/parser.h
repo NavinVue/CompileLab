@@ -64,9 +64,4 @@ void returnFunc(std::vector<word> words, Func* func); //return 语句
 // std::vector<std::vector<word>> findComma(std::vector<word> words); //返回， 分割的内容（第一个逗号“，"前后的内容）
 int findComma(std::vector<word> words); //返回， 分割的内容（第一个逗
 
-// void CallFunc(std::vector<word> words); //函数调用
-
-// void CallPrint(); //内置print函数的调用
-
-
 #endif //PARSER_H

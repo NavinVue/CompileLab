@@ -1,4 +1,5 @@
-
+// gusse... But I found my label naming problem and I passed after I solve the repeated label name
+//(I used to name if or while begin with 1 thus may cause repeat when 2 more functions has if sentence or while sentence). 
 
 int fibonacci(int n) {
     if (n <= 1) {

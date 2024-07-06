@@ -1,0 +1,306 @@
+.intel_syntax noprefix
+.global main
+.extern printf
+
+.data
+format_str:
+  .asciz "%d\n"
+
+.text
+
+  # define func: int
+fibonacci: #func fibonacci
+  push ebp # keep ebp
+  mov ebp, esp # keep esp
+  sub esp, 4# leave space for local var, define var num: 0
+  # recongize func body, in function defineFunc
+  # recongize if
+  # now if label is: 0
+  # else followed by {
+  # IN FUNC findifelse
+  # END func findifelse
+  condition_if_1:
+  mov eax, DWORD PTR [ebp+8] # come from argslist[0]
+  push eax
+  # now is symbol : <=
+  # stack empty, directly push in stack
+  mov eax, 1
+  push eax
+  pop ebx
+  pop eax
+  cmp eax, ebx
+  setle al
+  movzx eax, al
+  push eax
+  pop eax
+  test eax,eax
+  je if_1_false
+  if_1_true:
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: )
+  mov eax, 1
+  push eax
+  pop eax # after caculExpression of func arg
+  push eax # push arg into stack, ready call func
+  push offset format_str
+  call printf# call func: println_int
+  add esp, 4# stack balance
+  add esp, 4
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: n
+  mov eax, DWORD PTR [ebp+8] # come from argslist[0]
+  push eax
+  pop eax # pop return value after calExp
+  jmp if_1_end
+  if_1_false:
+  # followed else
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: )
+  mov eax, DWORD PTR [ebp+8] # come from argslist[0]
+  push eax
+  pop eax # after caculExpression of func arg
+  push eax # push arg into stack, ready call func
+  push offset format_str
+  call printf# call func: println_int
+  add esp, 4# stack balance
+  add esp, 4
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: )
+  # ready to call funcfibonacci
+  mov eax, DWORD PTR [ebp+8] # come from argslist[0]
+  push eax
+  # now is symbol : -
+  # stack empty, directly push in stack
+  mov eax, 1
+  push eax
+  pop ebx
+  pop eax
+  sub eax, ebx
+  push eax
+  pop eax # after caculExpression of func arg
+  push eax # push arg into stack, ready call func
+  call fibonacci# call func: fibonacci
+  add esp, 4# stack balance
+  push eax # in calExp, after funcall, push return value
+  # now is symbol : +
+  # stack empty, directly push in stack
+  # ready to call funcfibonacci
+  mov eax, DWORD PTR [ebp+8] # come from argslist[0]
+  push eax
+  # now is symbol : -
+  # stack empty, directly push in stack
+  mov eax, 2
+  push eax
+  pop ebx
+  pop eax
+  sub eax, ebx
+  push eax
+  pop eax # after caculExpression of func arg
+  push eax # push arg into stack, ready call func
+  call fibonacci# call func: fibonacci
+  add esp, 4# stack balance
+  push eax # in calExp, after funcall, push return value
+  pop ebx
+  pop eax
+  add eax, ebx
+  push eax
+  pop eax # pop return value after calExp
+  jmp if_1_end
+  if_1_end:
+  leave
+  ret
+
+  # define func: int
+main: #func main
+  push ebp # keep ebp
+  mov ebp, esp # keep esp
+  sub esp, 24# leave space for local var, define var num: 5
+  # recongize func body, in function defineFunc
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: n
+  mov DWORD PTR [ebp-4], 0 # int n
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: 5
+  # assign in
+  mov eax, 5
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-4], eax
+  # recongize if
+  # now if label is: 1
+  # else followed by {
+  # IN FUNC findifelse
+  # END func findifelse
+  condition_if_2:
+  mov eax, DWORD PTR [ebp-4]
+  push eax
+  # now is symbol : >
+  # stack empty, directly push in stack
+  mov eax, 10
+  push eax
+  pop ebx
+  pop eax
+  cmp eax, ebx
+  setg al
+  movzx eax, al
+  push eax
+  pop eax
+  test eax,eax
+  je if_2_false
+  if_2_true:
+  # recongize neigther if nor while
+  # found comma
+  # before comma should be: 0
+  mov DWORD PTR [ebp-8], 0 # int result
+  # assign in
+  mov eax, 0
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-8], eax
+  mov DWORD PTR [ebp-12], 0 # int i
+  # assign in
+  mov eax, 1
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-12], eax
+  mov DWORD PTR [ebp-16], 0 # int j
+  # assign in
+  mov eax, 1
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-16], eax
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: 0
+  mov DWORD PTR [ebp-20], 0 # int tmp
+  # assign in
+  mov eax, 0
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-20], eax
+  # recongize while
+  condition_while_1:
+  mov eax, DWORD PTR [ebp-16]
+  push eax
+  # now is symbol : <=
+  # stack empty, directly push in stack
+  mov eax, DWORD PTR [ebp-4]
+  push eax
+  pop ebx
+  pop eax
+  cmp eax, ebx
+  setle al
+  movzx eax, al
+  push eax
+  pop eax
+  test eax,eax
+  je while_1_false
+  while_1_true:
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: j
+  # assign in
+  mov eax, DWORD PTR [ebp-12]
+  push eax
+  # now is symbol : +
+  # stack empty, directly push in stack
+  mov eax, DWORD PTR [ebp-16]
+  push eax
+  pop ebx
+  pop eax
+  add eax, ebx
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-8], eax
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: j
+  # assign in
+  mov eax, DWORD PTR [ebp-16]
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-20], eax
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: i
+  # assign in
+  mov eax, DWORD PTR [ebp-16]
+  push eax
+  # now is symbol : +
+  # stack empty, directly push in stack
+  mov eax, DWORD PTR [ebp-12]
+  push eax
+  pop ebx
+  pop eax
+  add eax, ebx
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-16], eax
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: tmp
+  # assign in
+  mov eax, DWORD PTR [ebp-20]
+  push eax
+  # assign out
+  # assignment
+  pop eax # after calExp, pop eax
+  mov DWORD PTR [ebp-12], eax
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: )
+  mov eax, DWORD PTR [ebp-8]
+  push eax
+  pop eax # after caculExpression of func arg
+  push eax # push arg into stack, ready call func
+  push offset format_str
+  call printf# call func: println_int
+  add esp, 4# stack balance
+  add esp, 4
+  jmp condition_while_1
+  while_1_false:
+  jmp if_2_end
+  if_2_false:
+  # followed else
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: )
+  mov eax, DWORD PTR [ebp-4]
+  push eax
+  pop eax # after caculExpression of func arg
+  push eax # push arg into stack, ready call func
+  call fibonacci# call func: fibonacci
+  add esp, 4# stack balance
+  jmp if_2_end
+  if_2_end:
+  # recongize neigther if nor while
+  # no comma found
+  # before comma should be: 0
+  mov eax, 0
+  push eax
+  pop eax # pop return value after calExp
+  leave
+  ret
+
